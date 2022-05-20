@@ -46,4 +46,8 @@ dependencies {
 
     //for animation
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+
+    //for ads
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+
 }
