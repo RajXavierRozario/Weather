@@ -50,6 +50,9 @@ class Home : Fragment() {
 
     @SuppressLint("WrongViewCast")
     override fun onCreateView(
+
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
@@ -70,6 +73,8 @@ getCurrentLocation()
             }
             else false
         }
+
+
 
         // Inflate the layout for this fragment
         return fragmentHomeBinding.root

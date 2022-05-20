@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment
 import com.example.weather.POJO.ModelClass
 import com.example.weather.Utilities.ApiUtilities
 import com.example.weather.databinding.ActivityMainBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
@@ -36,9 +38,16 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         activityMainBinding=DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        MobileAds.initialize(this) {}
+        //mAdView = findViewById<>(R.id.adView)
+        val adBuilder = AdRequest.Builder().build()
+        adView.loadAd(adBuilder)
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true

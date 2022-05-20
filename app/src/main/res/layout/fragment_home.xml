@@ -8,10 +8,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Home"
-        android:id="@+id/main_layout">
+        tools:context=".Home">
 
         <ProgressBar
             android:id="@+id/pb_loading"
@@ -23,7 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
         <androidx.cardview.widget.CardView
@@ -45,8 +44,8 @@
                 android:background="@color/white"
                 android:drawableStart="?android:attr/actionModeWebSearchDrawable"
                 android:drawablePadding="@dimen/s_large"
-                android:hint="@string/search_places"
                 android:fontFamily="@font/akro_regular"
+                android:hint="@string/search_places"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:paddingStart="@dimen/s_large"
@@ -316,6 +315,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_weather_bg"
             app:layout_constraintVertical_bias="0.952" />
+
 
 
 
