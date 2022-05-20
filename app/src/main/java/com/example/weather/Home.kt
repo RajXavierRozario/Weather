@@ -23,10 +23,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import com.example.weather.POJO.ModelClass
 import com.example.weather.Utilities.ApiUtilities
 import com.example.weather.databinding.FragmentHomeBinding
-import com.example.weather.databinding.FragmentHomeBindingImpl
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import retrofit2.Call
@@ -53,7 +53,7 @@ class Home : Fragment() {
         super.onCreate(savedInstanceState)
 
 
-        activity()
+        getCurrentLocation()
 
         fragmentHomeBinding.etGetCityName.setOnEditorActionListener { v, actionId, keyEvent ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH)
@@ -76,6 +76,7 @@ class Home : Fragment() {
 
     private fun getCityWeather(cityName:String)
     {
+        fragmentHomeBinding.pbLoading.visibility = View.VISIBLE
         ApiUtilities.getApiInterface()?.getCityWeatherData(cityName, API_KEY)?.enqueue(
             object:Callback<ModelClass>{
                 override fun onResponse(call: Call<ModelClass>, response: Response<ModelClass>) {
@@ -89,8 +90,47 @@ class Home : Fragment() {
             })
     }
 
+    private fun getCurrentLocation()
+    {
+        if(checkPermission())
+        {
+            if(isLocationEnabled())
+            {
+                if(ActivityCompat.checkSelfPermission(
+                        requireActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        requireActivity(),
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ){
+                    requestPermission()
+                    return
+                }
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener(requireActivity()){ task->
+                    val location: Location?=task.result
+                    if(location==null)
+                    {
+                        fetchCurrentLocationWeather(23.76137119142536.toString(), 90.35059989467042.toString())
+                    }
+                    else
+                    {
+                        fetchCurrentLocationWeather(location.latitude.toString(),location.longitude.toString())
+                    }
+                }
+
+            }
+            else
+            {
+                Toast.makeText(activity?.applicationContext, "Turn on Location", Toast.LENGTH_SHORT).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        }
+    }
+
     private fun fetchCurrentLocationWeather(latitude: String, longitude:String)
     {
+        fragmentHomeBinding.pbLoading.visibility = View.VISIBLE
         ApiUtilities.getApiInterface()?.getCurrentWeatherData(latitude, longitude, API_KEY)?.enqueue(
             object : Callback<ModelClass> {
                 override fun onResponse(call: Call<ModelClass>, response: Response<ModelClass>) {
@@ -125,6 +165,7 @@ class Home : Fragment() {
 
 
     private fun updateUI(id: Int) {
+        fragmentHomeBinding.pbLoading.visibility = View.GONE
         fragmentHomeBinding.mainLayout.visibility = View.VISIBLE
     }
 
@@ -151,15 +192,15 @@ class Home : Fragment() {
 
     private fun requestPermission(){
         ActivityCompat.requestPermissions(
-            this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            requireActivity(), arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,
             android.Manifest.permission.ACCESS_FINE_LOCATION),
             PERMISSION_REQUEST_ACCESS_LOCATION
         )
     }
 
     private fun checkPermission():Boolean{
-        if(ActivityCompat.checkSelfPermission(this,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+        if(ActivityCompat.checkSelfPermission(requireActivity(),
+            android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(),
             android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
             return true
@@ -167,6 +208,7 @@ class Home : Fragment() {
         return false
     }
 
+    @Suppress("DEPRECATION")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -191,8 +233,9 @@ class Home : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+        fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return fragmentHomeBinding.root
     }
 
 

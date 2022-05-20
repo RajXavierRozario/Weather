@@ -89,94 +89,14 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         fragment.replace(R.id.fragment_container, frag).commit()
     }
 
-    private fun getCurrentLocation()
-    {
-
-        if(checkPermission())
-        {
-            if(isLocationEnabled())
-            {
-                if(ActivityCompat.checkSelfPermission(
-                        this,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this,
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    requestPermission()
-                    return
-                }
-                fusedLocationProviderClient.lastLocation.addOnCompleteListener(this){ task->
-                    val location: Location?=task.result
-                    if(location==null)
-                    {
-                        (23.76137119142536.toString(), 90.35059989467042.toString())
-                    }
-                    else
-                    {
-                        (location.latitude.toString(),location.longitude.toString())
-                    }
-                }
-            }
-            else
-            {
-                Toast.makeText(this, "Turn on Location", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        }
-        else
-        {
-            requestPermission()
-        }
-    }
 
 
 
-    private fun requestPermission()
-    {
-        ActivityCompat.requestPermissions(
-            this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),
-            Home.Companion.PERMISSION_REQUEST_ACCESS_LOCATION
-        )
-    }
 
-    private fun checkPermission():Boolean
-    {
-        if(ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
-        {
-            return true
-        }
-        return false
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == Home.Companion.PERMISSION_REQUEST_ACCESS_LOCATION)
-        {
-            if(grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(applicationContext, "Granted", Toast.LENGTH_SHORT).show()
-                getCurrentLocation()
-            }
-            else{
-                Toast.makeText(applicationContext, "Denied", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
-    private fun isLocationEnabled():Boolean{
-        val locationManager:LocationManager=getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER)
-    }
+
+
 
 
 
