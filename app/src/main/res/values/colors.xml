@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="splash_color">#f3f7fb</color>
+    <color name="about_color">#462947</color>
+    <color name="faq_color">#f6f3e5</color>
+    <color name="new_black">#343434</color>
 </resources>

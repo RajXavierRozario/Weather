@@ -10,6 +10,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
@@ -158,7 +159,7 @@ class Home : Fragment() {
         fragmentHomeBinding.tvDateTime.text = currentDate
         fragmentHomeBinding.tvDayMaxTemp.text = ""+kelvinToCelsius(body!!.main.temp_max) + "°"
         fragmentHomeBinding.tvDayMinTemp.text = ""+kelvinToCelsius(body!!.main.temp_min) + "°"
-        fragmentHomeBinding.tvTemp.text = ""+kelvinToCelsius(body!!.main.temp)
+        fragmentHomeBinding.tvTemp.text = ""+kelvinToCelsius(body!!.main.temp) + "°"
         fragmentHomeBinding.tvFeelsLike.text = "Feels like: "+kelvinToCelsius(body!!.main.feels_like) + "°"
         fragmentHomeBinding.tvWeatherType.text = body.weather[0].main
         fragmentHomeBinding.tvPressure.text = body.main.pressure.toString()
@@ -168,11 +169,52 @@ class Home : Fragment() {
         updateUI(body.weather[0].id)
     }
 
-
     private fun updateUI(id: Int) {
+
+        if (id in 200..232)
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.thunder_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvTemp.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvDateTime.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvFeelsLike.setTextColor(Color.WHITE)
+        }
+        else if(id in 300..321)
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.drizzle_bg)
+        }
+        else if(id in 500..531)
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.rain_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvTemp.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvDateTime.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvFeelsLike.setTextColor(Color.WHITE)
+        }
+        else if(id in 600..620)
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.snow_bg)
+        }
+        else if(id in 700..781)
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.mist_bg)
+        }
+        else if(id == 800)
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.clear_bg)
+        }
+        else
+        {
+            fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.cloud_bg)
+        }
+
+
+
         fragmentHomeBinding.pbLoading.visibility = View.GONE
         fragmentHomeBinding.mainLayout.visibility = View.VISIBLE
+
     }
+
 
     private fun kelvinToCelsius(temp: Double): Double
     {

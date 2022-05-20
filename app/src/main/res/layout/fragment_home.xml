@@ -63,40 +63,10 @@
             android:src="@drawable/sunny_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/tv_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akro_black"
-            android:text="@string/main_temp"
-            android:textColor="@color/black"
-            android:textSize="100sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.63" />
-
-        <TextView
-            android:id="@+id/tv_weather_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akro_regular"
-            android:text="@string/weather_type"
-            android:textColor="@color/black"
-            android:textSize="50sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.131"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.747" />
+            app:layout_constraintVertical_bias="0.961" />
 
         <TextView
             android:id="@+id/tv_city_name"
@@ -104,6 +74,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/akro_regular"
             android:text="@string/city_name"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -115,33 +86,74 @@
 
         <TextView
             android:id="@+id/tv_day_max_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
             android:fontFamily="@font/akro_regular"
             android:text="@string/day"
             android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.832"
+            app:layout_constraintHorizontal_bias="0.949"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.576" />
+            app:layout_constraintVertical_bias="0.532" />
 
         <TextView
             android:id="@+id/tv_day_min_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
             android:fontFamily="@font/akro_regular"
             android:text="@string/night"
             android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.831"
+            app:layout_constraintHorizontal_bias="0.949"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.649" />
+            app:layout_constraintVertical_bias="0.6" />
+
+        <TextView
+            android:id="@+id/tv_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/akro_black"
+            android:text="@string/main_temp"
+            android:textColor="@color/black"
+            android:textSize="100sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.568" />
+
+        <TextView
+            android:id="@+id/tv_weather_type"
+            android:layout_width="290dp"
+            android:layout_height="65dp"
+            android:fontFamily="@font/akro_regular"
+            android:text="@string/weather_type"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.705" />
+
+        <TextView
+            android:layout_width="335dp"
+            android:layout_height="6dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_weather_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.632" />
 
         <TextView
             android:id="@+id/tv_date_time"
@@ -149,11 +161,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/akro_regular"
             android:text="@string/demo_date"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.098"
+            app:layout_constraintHorizontal_bias="0.097"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.158" />
@@ -174,20 +187,9 @@
             app:layout_constraintVertical_bias="0.158" />
 
         <TextView
-            android:layout_width="335dp"
-            android:layout_height="6dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_weather_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.513"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.684" />
-
-        <TextView
             android:id="@+id/tv_pressure"
-            android:layout_width="35dp"
-            android:layout_height="29dp"
+            android:layout_width="58dp"
+            android:layout_height="30dp"
             android:fontFamily="@font/akro_bold"
             android:text="@string/default_numbers"
             android:textAlignment="center"
@@ -195,26 +197,14 @@
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.092"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="41dp"
-            android:layout_height="55dp"
-            android:src="@drawable/gauge"
-            app:layout_constraintBottom_toTopOf="@+id/textView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.086"
+            app:layout_constraintHorizontal_bias="0.084"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="45dp"
+            android:layout_width="47dp"
             android:layout_height="18dp"
             android:fontFamily="@font/akro_regular"
             android:text="@string/pressure"
@@ -223,15 +213,27 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintHorizontal_bias="0.098"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_weather_bg"
-            app:layout_constraintVertical_bias="0.952" />
+            app:layout_constraintVertical_bias="0.913" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="41dp"
+            android:layout_height="55dp"
+            android:src="@drawable/gauge"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.105"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tv_humidity"
-            android:layout_width="35dp"
-            android:layout_height="29dp"
+            android:layout_width="59dp"
+            android:layout_height="30dp"
             android:fontFamily="@font/akro_bold"
             android:text="@string/default_numbers"
             android:textAlignment="center"
@@ -239,14 +241,13 @@
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.308"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="45dp"
+            android:layout_width="46dp"
             android:layout_height="18dp"
             android:fontFamily="@font/akro_regular"
             android:text="@string/humidity"
@@ -255,10 +256,9 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.303"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_weather_bg"
-            app:layout_constraintVertical_bias="0.952" />
+            app:layout_constraintVertical_bias="0.913" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -267,15 +267,14 @@
             android:src="@drawable/humidity"
             app:layout_constraintBottom_toTopOf="@+id/textView6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.305"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tv_wind_speed"
-            android:layout_width="35dp"
-            android:layout_height="29dp"
+            android:layout_width="57dp"
+            android:layout_height="30dp"
             android:fontFamily="@font/akro_bold"
             android:text="@string/default_numbers"
             android:textAlignment="center"
@@ -283,19 +282,7 @@
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.526"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="41dp"
-            android:layout_height="55dp"
-            android:src="@drawable/wind"
-            app:layout_constraintBottom_toTopOf="@+id/textView7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintHorizontal_bias="0.898"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
@@ -311,13 +298,46 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintHorizontal_bias="0.885"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_weather_bg"
-            app:layout_constraintVertical_bias="0.952" />
+            app:layout_constraintVertical_bias="0.913" />
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="41dp"
+            android:layout_height="55dp"
+            android:src="@drawable/wind"
+            app:layout_constraintBottom_toTopOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.881"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="21dp"
+            android:layout_height="30dp"
+            android:src="@drawable/up_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.782"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.532" />
 
+        <ImageView
+            android:layout_width="21dp"
+            android:layout_height="30dp"
+
+            android:src="@drawable/down_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.784"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

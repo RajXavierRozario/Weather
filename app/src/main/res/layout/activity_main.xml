@@ -13,25 +13,23 @@
         android:id="@+id/drawerLayout"
         tools:context=".MainActivity">
 
-        <include layout="@layout/content_main"></include>
+        <include layout="@layout/content_main">
+
+        </include>
 
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="680dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="700dp"
-            android:layout_marginEnd="65dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="60dp"
             app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></com.google.android.gms.ads.AdView>
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
 
 
         <com.google.android.material.navigation.NavigationView
@@ -40,7 +38,8 @@
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/nav_menu"
             android:id="@+id/nav_menu"
-            android:layout_gravity="start"></com.google.android.material.navigation.NavigationView>
+            android:layout_gravity="start">
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
