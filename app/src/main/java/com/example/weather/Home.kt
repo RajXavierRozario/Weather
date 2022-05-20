@@ -49,12 +49,11 @@ class Home : Fragment() {
 
 
     @SuppressLint("WrongViewCast")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        getCurrentLocation()
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+getCurrentLocation()
         fragmentHomeBinding.etGetCityName.setOnEditorActionListener { v, actionId, keyEvent ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH)
             {
@@ -72,8 +71,9 @@ class Home : Fragment() {
             else false
         }
 
+        // Inflate the layout for this fragment
+        return fragmentHomeBinding.root
     }
-
     private fun getCityWeather(cityName:String)
     {
         fragmentHomeBinding.pbLoading.visibility = View.VISIBLE
@@ -230,13 +230,7 @@ class Home : Fragment() {
 
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        // Inflate the layout for this fragment
-        return fragmentHomeBinding.root
-    }
+
 
 
 }

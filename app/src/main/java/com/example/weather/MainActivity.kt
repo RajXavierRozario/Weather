@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         changeFragment(Home())
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        activityMainBinding.drawerLayout.visibility = View.GONE
+        //activityMainBinding.drawerLayout.visibility = View.GONE
 
 
 
