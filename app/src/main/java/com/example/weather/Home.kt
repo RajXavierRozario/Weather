@@ -56,7 +56,7 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-getCurrentLocation()
+
         fragmentHomeBinding.etGetCityName.setOnEditorActionListener { v, actionId, keyEvent ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH)
             {
