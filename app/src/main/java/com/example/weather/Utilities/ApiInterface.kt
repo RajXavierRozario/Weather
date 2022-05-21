@@ -9,15 +9,15 @@ interface ApiInterface {
 
     @GET("weather")
     fun getCurrentWeatherData(
-        @Query("lat") latitude:String,
-        @Query("lon") longitude:String,
-        @Query("APPID") api_key:String
-    ):Call<ModelClass>
+        @Query("lat") latitude: String,
+        @Query("lon") longitude: String,
+        @Query("APPID") api_key: String
+    ): Call<ModelClass>
 
 
     @GET("weather")
     fun getCityWeatherData(
-        @Query("q") cityName:String,
-        @Query("APPID") api_key:String
-    ):Call<ModelClass>
+        @Query("q") cityName: String,
+        @Query("APPID") api_key: String
+    ): Call<ModelClass>
 }

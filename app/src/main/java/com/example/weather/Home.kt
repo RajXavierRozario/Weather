@@ -53,79 +53,81 @@ class Home : Fragment() {
     override fun onCreateView(
 
 
-
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        savedInstanceState: Bundle?
+    ): View? {
+        fragmentHomeBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         fetchCurrentLocationWeather(23.76137119142536.toString(), 90.35059989467042.toString())
 
         fragmentHomeBinding.etGetCityName.setOnEditorActionListener { v, actionId, keyEvent ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH)
-            {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 getCityWeather(fragmentHomeBinding.etGetCityName.text.toString())
                 val view = activity?.currentFocus
-                if(view!=null)
-                {
-                    val imm:InputMethodManager=
+                if (view != null) {
+                    val imm: InputMethodManager =
                         activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(view.windowToken, 0)
                     fragmentHomeBinding.etGetCityName.clearFocus()
                 }
                 true
-            }
-            else false
+            } else false
         }
-
 
 
         // Inflate the layout for this fragment
         return fragmentHomeBinding.root
     }
-    private fun getCityWeather(cityName:String)
-    {
+
+    private fun getCityWeather(cityName: String) {
         fragmentHomeBinding.pbLoading.visibility = View.VISIBLE
         ApiUtilities.getApiInterface()?.getCityWeatherData(cityName, API_KEY)?.enqueue(
-            object:Callback<ModelClass>{
+            object : Callback<ModelClass> {
                 override fun onResponse(call: Call<ModelClass>, response: Response<ModelClass>) {
                     setDataOnViews((response.body()))
                 }
 
                 override fun onFailure(call: Call<ModelClass>, t: Throwable) {
-                    Toast.makeText(activity?.applicationContext, "Wrong City", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity?.applicationContext, "Wrong City", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             })
     }
 
 
-    private fun fetchCurrentLocationWeather(latitude: String, longitude:String)
-    {
+    private fun fetchCurrentLocationWeather(latitude: String, longitude: String) {
         fragmentHomeBinding.pbLoading.visibility = View.VISIBLE
-        ApiUtilities.getApiInterface()?.getCurrentWeatherData(latitude, longitude, API_KEY)?.enqueue(
-            object : Callback<ModelClass> {
-                override fun onResponse(call: Call<ModelClass>, response: Response<ModelClass>) {
-                    if(response.isSuccessful)
-                    {
-                        setDataOnViews(response.body())
+        ApiUtilities.getApiInterface()?.getCurrentWeatherData(latitude, longitude, API_KEY)
+            ?.enqueue(
+                object : Callback<ModelClass> {
+                    override fun onResponse(
+                        call: Call<ModelClass>,
+                        response: Response<ModelClass>
+                    ) {
+                        if (response.isSuccessful) {
+                            setDataOnViews(response.body())
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<ModelClass>, t: Throwable) {
-                    Toast.makeText(activity?.applicationContext, "ERROR", Toast.LENGTH_SHORT).show()
-                }
+                    override fun onFailure(call: Call<ModelClass>, t: Throwable) {
+                        Toast.makeText(activity?.applicationContext, "ERROR", Toast.LENGTH_SHORT)
+                            .show()
+                    }
 
-            })
+                })
     }
 
     private fun setDataOnViews(body: ModelClass?) {
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm")
         val currentDate = sdf.format(Date())
         fragmentHomeBinding.tvDateTime.text = currentDate
-        fragmentHomeBinding.tvDayMaxTemp.text = ""+kelvinToCelsius(body!!.main.temp_max) + "°"
-        fragmentHomeBinding.tvDayMinTemp.text = ""+kelvinToCelsius(body!!.main.temp_min) + "°"
-        fragmentHomeBinding.tvTemp.text = ""+kelvinToCelsius(body!!.main.temp) + "°"
-        fragmentHomeBinding.tvFeelsLike.text = "Feels like: "+kelvinToCelsius(body!!.main.feels_like) + "°"
+        fragmentHomeBinding.tvDayMaxTemp.text = "" + kelvinToCelsius(body!!.main.temp_max) + "°"
+        fragmentHomeBinding.tvDayMinTemp.text = "" + kelvinToCelsius(body!!.main.temp_min) + "°"
+        fragmentHomeBinding.tvTemp.text = "" + kelvinToCelsius(body!!.main.temp) + "°"
+        fragmentHomeBinding.tvFeelsLike.text =
+            "Feels like: " + kelvinToCelsius(body!!.main.feels_like) + "°"
         fragmentHomeBinding.tvWeatherType.text = body.weather[0].main
         fragmentHomeBinding.tvPressure.text = body.main.pressure.toString()
         fragmentHomeBinding.tvHumidity.text = body.main.humidity.toString() + " %"
@@ -136,8 +138,7 @@ class Home : Fragment() {
 
     private fun updateUI(id: Int) {
 
-        if (id in 200..232)
-        {
+        if (id in 200..232) {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.thunder_bg)
             fragmentHomeBinding.tvCityName.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvTemp.setTextColor(Color.WHITE)
@@ -145,9 +146,7 @@ class Home : Fragment() {
             fragmentHomeBinding.tvFeelsLike.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvWeatherType.setTextColor(Color.WHITE)
             fragmentHomeBinding.blackBar.setBackgroundColor(Color.WHITE)
-        }
-        else if(id in 300..321)
-        {
+        } else if (id in 300..321) {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.drizzle_bg)
             fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
@@ -155,9 +154,7 @@ class Home : Fragment() {
             fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
-        }
-        else if(id in 500..531)
-        {
+        } else if (id in 500..531) {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.rain_bg)
             fragmentHomeBinding.tvCityName.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvTemp.setTextColor(Color.WHITE)
@@ -165,9 +162,7 @@ class Home : Fragment() {
             fragmentHomeBinding.tvFeelsLike.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvWeatherType.setTextColor(Color.WHITE)
             fragmentHomeBinding.blackBar.setBackgroundColor(Color.WHITE)
-        }
-        else if(id in 600..620)
-        {
+        } else if (id in 600..620) {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.snow_bg)
             fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
@@ -175,9 +170,7 @@ class Home : Fragment() {
             fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
-        }
-        else if(id in 700..781)
-        {
+        } else if (id in 700..781) {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.mist_bg)
             fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
@@ -185,9 +178,7 @@ class Home : Fragment() {
             fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
-        }
-        else if(id == 800)
-        {
+        } else if (id == 800) {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.clear_bg)
             fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
@@ -195,9 +186,7 @@ class Home : Fragment() {
             fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
-        }
-        else
-        {
+        } else {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.cloud_bg)
             fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
             fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
@@ -215,25 +204,16 @@ class Home : Fragment() {
     }
 
 
-    private fun kelvinToCelsius(temp: Double): Double
-    {
-    var intTemp = temp
+    private fun kelvinToCelsius(temp: Double): Double {
+        var intTemp = temp
         intTemp = intTemp.minus(273)
         return intTemp.toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
     }
 
 
-    companion object
-    {
+    companion object {
         const val API_KEY = "3c709ccaf2730aa1c263925f75db631a"
     }
-
-
-
-
-
-
-
 
 
 }

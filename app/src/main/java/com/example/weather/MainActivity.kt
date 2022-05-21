@@ -30,18 +30,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var activityMainBinding: ActivityMainBinding
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
         super.onCreate(savedInstanceState)
-        activityMainBinding=DataBindingUtil.setContentView(this, R.layout.activity_main)
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         MobileAds.initialize(this) {}
@@ -49,7 +48,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         val adBuilder = AdRequest.Builder().build()
         adView.loadAd(adBuilder)
 
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
+        val toggle =
+            ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -63,15 +63,12 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         //activityMainBinding.drawerLayout.visibility = View.GONE
 
 
-
-
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawerLayout.closeDrawer(GravityCompat.START)
 
-        when(item.itemId){
+        when (item.itemId) {
             R.id.m_home -> {
                 setToolbarTitle("Home")
                 changeFragment(Home())
@@ -89,26 +86,14 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
     }
 
-    fun setToolbarTitle(title:String){
+    fun setToolbarTitle(title: String) {
         supportActionBar?.title = title
     }
 
-    fun changeFragment(frag: Fragment){
+    fun changeFragment(frag: Fragment) {
         val fragment = supportFragmentManager.beginTransaction()
         fragment.replace(R.id.fragment_container, frag).commit()
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

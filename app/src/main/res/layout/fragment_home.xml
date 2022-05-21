@@ -145,9 +145,9 @@
             app:layout_constraintVertical_bias="0.705" />
 
         <TextView
+            android:id="@+id/black_bar"
             android:layout_width="343dp"
             android:layout_height="7dp"
-            android:id="@+id/black_bar"
             android:background="@color/new_black"
             app:layout_constraintBottom_toBottomOf="@+id/iv_weather_bg"
             app:layout_constraintEnd_toEndOf="parent"
