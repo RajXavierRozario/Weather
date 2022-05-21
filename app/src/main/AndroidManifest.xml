@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,9 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Weather">
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.Weather.NoActionBar"
+            android:name=".DbActivity"
             android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Weather.NoActionBar" />
         <activity
             android:name=".Splash"
             android:exported="true">
@@ -32,7 +33,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7570795993963032~3844674764"/>
+            android:value="ca-app-pub-7570795993963032~3844674764" />
     </application>
 
 </manifest>

@@ -16,9 +16,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.ListFragment
 import com.example.weather.POJO.ModelClass
 import com.example.weather.Utilities.ApiUtilities
 import com.example.weather.databinding.ActivityMainBinding
+import com.example.weather.fragments.add.AddFragment
+import com.example.weather.fragments.list.History
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -83,6 +86,14 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             R.id.m_faq -> {
                 setToolbarTitle("Frequently Asked Questions")
                 changeFragment(Faq())
+            }
+            R.id.m_history -> {
+                setToolbarTitle("Add Cities")
+                changeFragment(AddFragment())
+            }
+            R.id.dummy -> {
+                setToolbarTitle("View Cities")
+                changeFragment(History())
             }
         }
         return true

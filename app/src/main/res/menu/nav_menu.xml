@@ -10,4 +10,10 @@
     <item
         android:id="@+id/m_about"
         android:title="About Us" />
+    <item
+        android:id="@+id/m_history"
+        android:title="Add City" />
+    <item
+        android:id="@+id/dummy"
+        android:title="View Cities" />
 </menu>
