@@ -6,11 +6,24 @@
     android:layout_height="150dp"
     android:background="@color/black">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView2"
+        android:layout_width="644dp"
+        android:layout_height="243dp"
+        android:src="@drawable/water_waves"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"></pl.droidsonroids.gif.GifImageView>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Header"
+        android:fontFamily="@font/akro_black"
+        android:text="Menu"
         android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,4 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.504" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

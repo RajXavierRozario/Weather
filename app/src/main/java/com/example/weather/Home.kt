@@ -58,6 +58,8 @@ class Home : Fragment() {
         savedInstanceState: Bundle?): View? {
         fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
+        fetchCurrentLocationWeather(23.76137119142536.toString(), 90.35059989467042.toString())
+
         fragmentHomeBinding.etGetCityName.setOnEditorActionListener { v, actionId, keyEvent ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH)
             {
@@ -96,43 +98,6 @@ class Home : Fragment() {
             })
     }
 
-    private fun getCurrentLocation()
-    {
-        if(checkPermission())
-        {
-            if(isLocationEnabled())
-            {
-                if(ActivityCompat.checkSelfPermission(
-                        requireActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        requireActivity(),
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED
-                ){
-                    requestPermission()
-                    return
-                }
-                fusedLocationProviderClient.lastLocation.addOnCompleteListener(requireActivity()){ task->
-                    val location: Location?=task.result
-                    if(location==null)
-                    {
-                        fetchCurrentLocationWeather(23.76137119142536.toString(), 90.35059989467042.toString())
-                    }
-                    else
-                    {
-                        fetchCurrentLocationWeather(location.latitude.toString(),location.longitude.toString())
-                    }
-                }
-
-            }
-            else
-            {
-                Toast.makeText(activity?.applicationContext, "Turn on Location", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        }
-    }
 
     private fun fetchCurrentLocationWeather(latitude: String, longitude:String)
     {
@@ -178,10 +143,18 @@ class Home : Fragment() {
             fragmentHomeBinding.tvTemp.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvDateTime.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvFeelsLike.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvWeatherType.setTextColor(Color.WHITE)
+            fragmentHomeBinding.blackBar.setBackgroundColor(Color.WHITE)
         }
         else if(id in 300..321)
         {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.drizzle_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvDateTime.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
         }
         else if(id in 500..531)
         {
@@ -190,22 +163,48 @@ class Home : Fragment() {
             fragmentHomeBinding.tvTemp.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvDateTime.setTextColor(Color.WHITE)
             fragmentHomeBinding.tvFeelsLike.setTextColor(Color.WHITE)
+            fragmentHomeBinding.tvWeatherType.setTextColor(Color.WHITE)
+            fragmentHomeBinding.blackBar.setBackgroundColor(Color.WHITE)
         }
         else if(id in 600..620)
         {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.snow_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvDateTime.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
         }
         else if(id in 700..781)
         {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.mist_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvDateTime.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
         }
         else if(id == 800)
         {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.clear_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvDateTime.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
         }
         else
         {
             fragmentHomeBinding.ivWeatherBg.setImageResource(R.drawable.cloud_bg)
+            fragmentHomeBinding.tvCityName.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvTemp.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvDateTime.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvFeelsLike.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.tvWeatherType.setTextColor(resources.getColor(R.color.new_black))
+            fragmentHomeBinding.blackBar.setBackgroundColor(resources.getColor(R.color.new_black))
         }
 
 
@@ -226,54 +225,11 @@ class Home : Fragment() {
 
     companion object
     {
-        const val PERMISSION_REQUEST_ACCESS_LOCATION = 100
         const val API_KEY = "3c709ccaf2730aa1c263925f75db631a"
     }
 
-    private fun isLocationEnabled():Boolean{
-        val locationManager:LocationManager=activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
 
-    private fun requestPermission(){
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,
-            android.Manifest.permission.ACCESS_FINE_LOCATION),
-            PERMISSION_REQUEST_ACCESS_LOCATION
-        )
-    }
 
-    private fun checkPermission():Boolean{
-        if(ActivityCompat.checkSelfPermission(requireActivity(),
-            android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(),
-            android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
-            return true
-        }
-        return false
-    }
-
-    @Suppress("DEPRECATION")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode== PERMISSION_REQUEST_ACCESS_LOCATION)
-        {
-            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(activity?.applicationContext, "Granted", Toast.LENGTH_SHORT).show()
-                getCurrentLocation()
-            }
-            else{
-                Toast.makeText(activity?.applicationContext, "Denied", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
 
 
