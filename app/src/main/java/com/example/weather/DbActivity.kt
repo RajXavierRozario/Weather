@@ -10,7 +10,7 @@ class DbActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_db)
 
-        setupActionBarWithNavController(findNavController(R.id.fragment))
+        //setupActionBarWithNavController(findNavController(R.id.fragment))
     }
 
 
